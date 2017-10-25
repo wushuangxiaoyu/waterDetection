@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<!--
+	Aerial 1.0 by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<link rel="icon" type="shortcut icon" href="./detail/style/images/icon.ico">
+	
+		<title>安徽农业大学水质检测系统</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link rel="stylesheet" type="text/css" href="./detail/style/css/remodal.css">
+		<link rel="stylesheet" type="text/css" href="./detail/style/css/remodal-default-theme.css">
+		<style>
+		    .remodal-bg.with-red-theme.remodal-is-opening,
+		    .remodal-bg.with-red-theme.remodal-is-opened {
+		      filter: none;
+		    }
+
+		    .remodal-overlay.with-red-theme {
+		      background-color: #f44336;
+		    }
+
+		    .remodal.with-red-theme {
+		      background: #fff;
+		    }
+	 	 </style>
+
+		<script src="detail/style/js/skel.min.js"></script>
+		<script src="detail/style/js/init.js"></script>
+		<script src="detail/js/jquery-1.8.2.js"></script>
+		<script>
+			function getSignIn(){
+				
+			}
+			
+			function getSignUp(){
+			
+			}
+		</script>
+		
+
+	</head>
+	<body class="loading">
+		<div id="wrapper">
+			<div id="bg"></div>
+			<div id="overlay"></div>
+			<div id="main">
+
+				<!-- Header -->
+					<header id="header">
+						<h1>水质检测系统</h1>
+						<div class="remodal-bg"><a href="#modal">登录</a>&nbsp;&bull;&nbsp;<a href="">注册</a></div>
+						<nav>
+							
+						</nav>
+					</header>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<span class="copyright">&copy;<a href="http://www.ahau.edu.cn/" target="new">安徽农业大学</a>.</span>
+					</footer>
+				
+			</div>
+		</div>
+		<!--登录窗口-->
+		<div style="background-color:rgba(0, 0, 0, 0)" class="remodal" data-remodal-id="modal" role="dialog" aria-labelledby="modal1Title" aria-describedby="modal1Desc">
+		  <div>
+		  	<p id="modal2Desc">
+		  	<form action="login" method="Post" >
+				<span style="font-weight: 900;color:#fff">用户:</span>
+				<input type="text" id="userName" style="color: #000;border-color: #fff" name="user.userName"  >
+				<br>
+				<span id="userName_span" style="color:#FF0000;font-size:10px"></span>
+				<br>
+				<span style="font-weight: 900;color: #fff">密码:</span>
+				<input type="password" id="password" style="color: #000;border-color: #fff" name="user.psd">
+				<br>
+				<span id="psd_span" style="color:#FF0000;font-size:10px"></span>
+				<br>
+				<div>
+					<!-- <button data-remodal-action="cancel" class="remodal-cancel">关闭<tton> -->
+					<input type="reset"  data-remodal-action="cancel" class="sign-in" value="关闭" style="background-color: #028cd5;border-width:0">
+					<input type="button"  class="sign-in" value="登录" style="background-color: #028cd5;border-width:0">
+				</div>
+			</form>
+			</p>
+		  </div>  
+		</div>
+
+		<script src="./detail/style/js/login.js"></script>
+		<script src="./detail/style/js/remodal.js"></script>
+		<script>
+		  $(document).on('opening', '.remodal', function () {
+		    console.log('opening');
+		  });
+
+		  $(document).on('opened', '.remodal', function () {
+		    console.log('opened');
+		  });
+
+		  $(document).on('closing', '.remodal', function (e) {
+		    console.log('closing' + (e.reason ? ', reason: ' + e.reason : ''));
+		  });
+
+		  $(document).on('closed', '.remodal', function (e) {
+		    console.log('closed' + (e.reason ? ', reason: ' + e.reason : ''));
+		  });
+
+		  $(document).on('confirmation', '.remodal', function () {
+		    console.log('confirmation');
+		  });
+
+		  $(document).on('cancellation', '.remodal', function () {
+		    console.log('cancellation');
+		  });
+		  //  The second way to initialize:
+		  $('[data-remodal-id=modal2]').remodal({
+		    modifier: 'with-red-theme'
+		  });
+		</script>
+	</body>
+</html>

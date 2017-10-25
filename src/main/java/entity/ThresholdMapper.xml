@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.ThresholdMapper" >
+
+  <resultMap id="BaseResultMap" type="entity.Threshold" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="water_eqp_id" property="waterEqpId" jdbcType="INTEGER" />
+    <result column="max_ph" property="maxPh" jdbcType="DOUBLE" />
+    <result column="min_ph" property="minPh" jdbcType="DOUBLE" />
+    <result column="max_tmp" property="maxTmp" jdbcType="DOUBLE" />
+    <result column="min_tmp" property="minTmp" jdbcType="DOUBLE" />
+    <result column="max_oxy" property="maxOxy" jdbcType="DOUBLE" />
+    <result column="min_oxy" property="minOxy" jdbcType="DOUBLE" />
+    <result column="max_heavy" property="maxHeavy" jdbcType="DOUBLE" />
+    <result column="min_heavy" property="minHeavy" jdbcType="DOUBLE" />
+    <result column="max_chy" property="maxChy" jdbcType="DOUBLE" />
+    <result column="min_chy" property="minChy" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, water_eqp_id, max_ph, min_ph, max_tmp, min_tmp, max_oxy, min_oxy, max_heavy, 
+    min_heavy, max_chy, min_chy
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="entity.ThresholdExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from threshold
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from threshold
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from threshold
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="entity.ThresholdExample" >
+    delete from threshold
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="entity.Threshold" >
+    insert into threshold (id, water_eqp_id, max_ph, 
+      min_ph, max_tmp, min_tmp, 
+      max_oxy, min_oxy, max_heavy, 
+      min_heavy, max_chy, min_chy
+      )
+    values (#{id,jdbcType=INTEGER}, #{waterEqpId,jdbcType=INTEGER}, #{maxPh,jdbcType=DOUBLE}, 
+      #{minPh,jdbcType=DOUBLE}, #{maxTmp,jdbcType=DOUBLE}, #{minTmp,jdbcType=DOUBLE}, 
+      #{maxOxy,jdbcType=DOUBLE}, #{minOxy,jdbcType=DOUBLE}, #{maxHeavy,jdbcType=DOUBLE}, 
+      #{minHeavy,jdbcType=DOUBLE}, #{maxChy,jdbcType=DOUBLE}, #{minChy,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="entity.Threshold" >
+    insert into threshold
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="waterEqpId != null" >
+        water_eqp_id,
+      </if>
+      <if test="maxPh != null" >
+        max_ph,
+      </if>
+      <if test="minPh != null" >
+        min_ph,
+      </if>
+      <if test="maxTmp != null" >
+        max_tmp,
+      </if>
+      <if test="minTmp != null" >
+        min_tmp,
+      </if>
+      <if test="maxOxy != null" >
+        max_oxy,
+      </if>
+      <if test="minOxy != null" >
+        min_oxy,
+      </if>
+      <if test="maxHeavy != null" >
+        max_heavy,
+      </if>
+      <if test="minHeavy != null" >
+        min_heavy,
+      </if>
+      <if test="maxChy != null" >
+        max_chy,
+      </if>
+      <if test="minChy != null" >
+        min_chy,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="waterEqpId != null" >
+        #{waterEqpId,jdbcType=INTEGER},
+      </if>
+      <if test="maxPh != null" >
+        #{maxPh,jdbcType=DOUBLE},
+      </if>
+      <if test="minPh != null" >
+        #{minPh,jdbcType=DOUBLE},
+      </if>
+      <if test="maxTmp != null" >
+        #{maxTmp,jdbcType=DOUBLE},
+      </if>
+      <if test="minTmp != null" >
+        #{minTmp,jdbcType=DOUBLE},
+      </if>
+      <if test="maxOxy != null" >
+        #{maxOxy,jdbcType=DOUBLE},
+      </if>
+      <if test="minOxy != null" >
+        #{minOxy,jdbcType=DOUBLE},
+      </if>
+      <if test="maxHeavy != null" >
+        #{maxHeavy,jdbcType=DOUBLE},
+      </if>
+      <if test="minHeavy != null" >
+        #{minHeavy,jdbcType=DOUBLE},
+      </if>
+      <if test="maxChy != null" >
+        #{maxChy,jdbcType=DOUBLE},
+      </if>
+      <if test="minChy != null" >
+        #{minChy,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="entity.ThresholdExample" resultType="java.lang.Integer" >
+    select count(*) from threshold
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update threshold
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.waterEqpId != null" >
+        water_eqp_id = #{record.waterEqpId,jdbcType=INTEGER},
+      </if>
+      <if test="record.maxPh != null" >
+        max_ph = #{record.maxPh,jdbcType=DOUBLE},
+      </if>
+      <if test="record.minPh != null" >
+        min_ph = #{record.minPh,jdbcType=DOUBLE},
+      </if>
+      <if test="record.maxTmp != null" >
+        max_tmp = #{record.maxTmp,jdbcType=DOUBLE},
+      </if>
+      <if test="record.minTmp != null" >
+        min_tmp = #{record.minTmp,jdbcType=DOUBLE},
+      </if>
+      <if test="record.maxOxy != null" >
+        max_oxy = #{record.maxOxy,jdbcType=DOUBLE},
+      </if>
+      <if test="record.minOxy != null" >
+        min_oxy = #{record.minOxy,jdbcType=DOUBLE},
+      </if>
+      <if test="record.maxHeavy != null" >
+        max_heavy = #{record.maxHeavy,jdbcType=DOUBLE},
+      </if>
+      <if test="record.minHeavy != null" >
+        min_heavy = #{record.minHeavy,jdbcType=DOUBLE},
+      </if>
+      <if test="record.maxChy != null" >
+        max_chy = #{record.maxChy,jdbcType=DOUBLE},
+      </if>
+      <if test="record.minChy != null" >
+        min_chy = #{record.minChy,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update threshold
+    set id = #{record.id,jdbcType=INTEGER},
+      water_eqp_id = #{record.waterEqpId,jdbcType=INTEGER},
+      max_ph = #{record.maxPh,jdbcType=DOUBLE},
+      min_ph = #{record.minPh,jdbcType=DOUBLE},
+      max_tmp = #{record.maxTmp,jdbcType=DOUBLE},
+      min_tmp = #{record.minTmp,jdbcType=DOUBLE},
+      max_oxy = #{record.maxOxy,jdbcType=DOUBLE},
+      min_oxy = #{record.minOxy,jdbcType=DOUBLE},
+      max_heavy = #{record.maxHeavy,jdbcType=DOUBLE},
+      min_heavy = #{record.minHeavy,jdbcType=DOUBLE},
+      max_chy = #{record.maxChy,jdbcType=DOUBLE},
+      min_chy = #{record.minChy,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="entity.Threshold" >
+    update threshold
+    <set >
+      <if test="waterEqpId != null" >
+        water_eqp_id = #{waterEqpId,jdbcType=INTEGER},
+      </if>
+      <if test="maxPh != null" >
+        max_ph = #{maxPh,jdbcType=DOUBLE},
+      </if>
+      <if test="minPh != null" >
+        min_ph = #{minPh,jdbcType=DOUBLE},
+      </if>
+      <if test="maxTmp != null" >
+        max_tmp = #{maxTmp,jdbcType=DOUBLE},
+      </if>
+      <if test="minTmp != null" >
+        min_tmp = #{minTmp,jdbcType=DOUBLE},
+      </if>
+      <if test="maxOxy != null" >
+        max_oxy = #{maxOxy,jdbcType=DOUBLE},
+      </if>
+      <if test="minOxy != null" >
+        min_oxy = #{minOxy,jdbcType=DOUBLE},
+      </if>
+      <if test="maxHeavy != null" >
+        max_heavy = #{maxHeavy,jdbcType=DOUBLE},
+      </if>
+      <if test="minHeavy != null" >
+        min_heavy = #{minHeavy,jdbcType=DOUBLE},
+      </if>
+      <if test="maxChy != null" >
+        max_chy = #{maxChy,jdbcType=DOUBLE},
+      </if>
+      <if test="minChy != null" >
+        min_chy = #{minChy,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="entity.Threshold" >
+    update threshold
+    set water_eqp_id = #{waterEqpId,jdbcType=INTEGER},
+      max_ph = #{maxPh,jdbcType=DOUBLE},
+      min_ph = #{minPh,jdbcType=DOUBLE},
+      max_tmp = #{maxTmp,jdbcType=DOUBLE},
+      min_tmp = #{minTmp,jdbcType=DOUBLE},
+      max_oxy = #{maxOxy,jdbcType=DOUBLE},
+      min_oxy = #{minOxy,jdbcType=DOUBLE},
+      max_heavy = #{maxHeavy,jdbcType=DOUBLE},
+      min_heavy = #{minHeavy,jdbcType=DOUBLE},
+      max_chy = #{maxChy,jdbcType=DOUBLE},
+      min_chy = #{minChy,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

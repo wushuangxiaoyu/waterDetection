@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="water_detection@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.4">
+    <root id="1"/>
+    <schema id="2" parent="1" name="water_detection">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="db_book"/>
+    <schema id="4" parent="1" name="db_forum"/>
+    <schema id="5" parent="1" name="db_student"/>
+    <schema id="6" parent="1" name="demo"/>
+    <schema id="7" parent="1" name="hotel"/>
+    <schema id="8" parent="1" name="information_schema"/>
+    <schema id="9" parent="1" name="moden"/>
+    <schema id="10" parent="1" name="mybatistest"/>
+    <schema id="11" parent="1" name="mybook"/>
+    <schema id="12" parent="1" name="mysql"/>
+    <schema id="13" parent="1" name="scm"/>
+    <schema id="14" parent="1" name="test"/>
+    <schema id="15" parent="1" name="test2"/>
+    <schema id="16" parent="1" name="test3"/>
+    <schema id="17" parent="1" name="water"/>
+    <schema id="18" parent="1" name="yongsql"/>
+    <schema id="19" parent="1" name="yu_account"/>
+    <table id="20" parent="2" name="threshold"/>
+    <table id="21" parent="2" name="water_equipment"/>
+    <table id="22" parent="2" name="water_record"/>
+    <table id="23" parent="2" name="water_user"/>
+    <column id="24" parent="20" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="25" parent="20" name="water_eqp_id">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="26" parent="20" name="max_ph">
+      <Position>3</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="27" parent="20" name="min_ph">
+      <Position>4</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="28" parent="20" name="max_tmp">
+      <Position>5</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="29" parent="20" name="min_tmp">
+      <Position>6</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="30" parent="20" name="max_oxy">
+      <Position>7</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="31" parent="20" name="min_oxy">
+      <Position>8</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="32" parent="20" name="max_heavy">
+      <Position>9</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="33" parent="20" name="min_heavy">
+      <Position>10</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="34" parent="20" name="max_chy">
+      <Position>11</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="35" parent="20" name="min_chy">
+      <Position>12</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <key id="36" parent="20" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="37" parent="21" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="38" parent="21" name="wat_id">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="39" parent="21" name="equipment_name">
+      <Position>3</Position>
+      <DataType>varchar(8)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="40" parent="21" name="clearNow">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="41" parent="21" name="water_condition">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="42" parent="21" name="x_point">
+      <Position>6</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="43" parent="21" name="y_point">
+      <Position>7</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="44" parent="21" name="flag_ph">
+      <Position>8</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="45" parent="21" name="flag_tmp_oxy">
+      <Position>9</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="46" parent="21" name="flag_heavy">
+      <Position>10</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="47" parent="21" name="flag_chy">
+      <Position>11</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <index id="48" parent="21" name="FK_user_equipment">
+      <ColNames>wat_id</ColNames>
+    </index>
+    <key id="49" parent="21" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="50" parent="21" name="FK_user_equipment">
+      <ColNames>wat_id</ColNames>
+      <RefSchemaName>water_detection</RefSchemaName>
+      <RefTableName>water_user</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="51" parent="22" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="52" parent="22" name="time">
+      <Position>2</Position>
+      <DataType>datetime|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="53" parent="22" name="water_oxy">
+      <Position>3</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="54" parent="22" name="water_tmp">
+      <Position>4</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="55" parent="22" name="water_ph">
+      <Position>5</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="56" parent="22" name="water_heavy">
+      <Position>6</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="57" parent="22" name="water_chy">
+      <Position>7</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <key id="58" parent="22" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="59" parent="23" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="60" parent="23" name="userName">
+      <Position>2</Position>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="61" parent="23" name="password">
+      <Position>3</Position>
+      <DataType>varchar(10)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="62" parent="23" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>

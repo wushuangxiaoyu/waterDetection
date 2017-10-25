@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.WaterRecordMapper" >
+  <resultMap id="BaseResultMap" type="entity.WaterRecord" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="water_oxy" property="waterOxy" jdbcType="DOUBLE" />
+    <result column="water_tmp" property="waterTmp" jdbcType="DOUBLE" />
+    <result column="water_ph" property="waterPh" jdbcType="DOUBLE" />
+    <result column="water_heavy" property="waterHeavy" jdbcType="DOUBLE" />
+    <result column="water_chy" property="waterChy" jdbcType="DOUBLE" />
+  </resultMap>
+  <resultMap id="HighChartResultMap" type="entity.HighChartData">
+    <result column="x" property="x" jdbcType="DATE"/>
+    <result column="y" property="y" jdbcType="DOUBLE"/>
+  </resultMap>
+
+  <resultMap id="PieChartResultMap" type="entity.WaterRecord">
+    <result column="x" property="time" jdbcType="TIMESTAMP" />
+    <result column="Oxy" property="waterOxy" jdbcType="DOUBLE" />
+    <result column="Tmp" property="waterTmp" jdbcType="DOUBLE" />
+    <result column="Ph" property="waterPh" jdbcType="DOUBLE" />
+    <result column="Heavy" property="waterHeavy" jdbcType="DOUBLE" />
+    <result column="Chy" property="waterChy" jdbcType="DOUBLE" />
+  </resultMap>
+
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, time, water_oxy, water_tmp, water_ph, water_heavy, water_chy
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="entity.WaterRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from water_record${eqpId}
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from water_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from water_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="entity.WaterRecordExample" >
+    delete from water_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="entity.WaterRecord" >
+    insert into water_record (id, time, water_oxy, 
+      water_tmp, water_ph, water_heavy, 
+      water_chy)
+    values (#{id,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, #{waterOxy,jdbcType=DOUBLE}, 
+      #{waterTmp,jdbcType=DOUBLE}, #{waterPh,jdbcType=DOUBLE}, #{waterHeavy,jdbcType=DOUBLE}, 
+      #{waterChy,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="entity.WaterRecord" >
+    insert into water_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="waterOxy != null" >
+        water_oxy,
+      </if>
+      <if test="waterTmp != null" >
+        water_tmp,
+      </if>
+      <if test="waterPh != null" >
+        water_ph,
+      </if>
+      <if test="waterHeavy != null" >
+        water_heavy,
+      </if>
+      <if test="waterChy != null" >
+        water_chy,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="waterOxy != null" >
+        #{waterOxy,jdbcType=DOUBLE},
+      </if>
+      <if test="waterTmp != null" >
+        #{waterTmp,jdbcType=DOUBLE},
+      </if>
+      <if test="waterPh != null" >
+        #{waterPh,jdbcType=DOUBLE},
+      </if>
+      <if test="waterHeavy != null" >
+        #{waterHeavy,jdbcType=DOUBLE},
+      </if>
+      <if test="waterChy != null" >
+        #{waterChy,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="entity.WaterRecordExample" resultType="java.lang.Integer" >
+    select count(*) from water_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update water_record
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.waterOxy != null" >
+        water_oxy = #{record.waterOxy,jdbcType=DOUBLE},
+      </if>
+      <if test="record.waterTmp != null" >
+        water_tmp = #{record.waterTmp,jdbcType=DOUBLE},
+      </if>
+      <if test="record.waterPh != null" >
+        water_ph = #{record.waterPh,jdbcType=DOUBLE},
+      </if>
+      <if test="record.waterHeavy != null" >
+        water_heavy = #{record.waterHeavy,jdbcType=DOUBLE},
+      </if>
+      <if test="record.waterChy != null" >
+        water_chy = #{record.waterChy,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update water_record
+    set id = #{record.id,jdbcType=INTEGER},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      water_oxy = #{record.waterOxy,jdbcType=DOUBLE},
+      water_tmp = #{record.waterTmp,jdbcType=DOUBLE},
+      water_ph = #{record.waterPh,jdbcType=DOUBLE},
+      water_heavy = #{record.waterHeavy,jdbcType=DOUBLE},
+      water_chy = #{record.waterChy,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="entity.WaterRecord" >
+    update water_record
+    <set >
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="waterOxy != null" >
+        water_oxy = #{waterOxy,jdbcType=DOUBLE},
+      </if>
+      <if test="waterTmp != null" >
+        water_tmp = #{waterTmp,jdbcType=DOUBLE},
+      </if>
+      <if test="waterPh != null" >
+        water_ph = #{waterPh,jdbcType=DOUBLE},
+      </if>
+      <if test="waterHeavy != null" >
+        water_heavy = #{waterHeavy,jdbcType=DOUBLE},
+      </if>
+      <if test="waterChy != null" >
+        water_chy = #{waterChy,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="entity.WaterRecord" >
+    update water_record
+    set time = #{time,jdbcType=TIMESTAMP},
+      water_oxy = #{waterOxy,jdbcType=DOUBLE},
+      water_tmp = #{waterTmp,jdbcType=DOUBLE},
+      water_ph = #{waterPh,jdbcType=DOUBLE},
+      water_heavy = #{waterHeavy,jdbcType=DOUBLE},
+      water_chy = #{waterChy,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="getPipelineData" parameterType="map" resultMap="HighChartResultMap">
+    SELECT DATE_FORMAT(X,"%Y-%m-%d %H:%i:%s") AS x,Y
+    FROM(
+    SELECT DATE_FORMAT(TIME,
+        <if test="lidu==0">
+          "%Y-%m-%d %H"
+        </if>
+        <if test="lidu==1">
+          "%Y-%m-%d"
+        </if>
+        <if test="lidu==2">
+          "%Y-%m"
+        </if>
+    ) AS x,
+    <if test="what==0">
+      <if test="tongji==0">
+          MAX(water_ph)
+      </if>
+      <if test="tongji==1">
+          MIN(water_ph)
+      </if>
+      <if test="tongji==2">
+          AVG(water_ph)
+      </if>
+    </if>
+    <if test="what==1">
+      <if test="tongji==0">
+        MAX(water_oxy)
+      </if>
+      <if test="tongji==1">
+        MIN(water_oxy)
+      </if>
+      <if test="tongji==2">
+        AVG(water_oxy)
+      </if>
+    </if>
+    <if test="what==2">
+      <if test="tongji==0">
+        MAX(water_heavy)
+      </if>
+      <if test="tongji==1">
+        MIN(water_heavy)
+      </if>
+      <if test="tongji==2">
+        AVG(water_heavy)
+      </if>
+    </if>
+    <if test="what==3">
+      <if test="tongji==0">
+        MAX(water_chy)
+      </if>
+      <if test="tongji==1">
+        MIN(water_chy)
+      </if>
+      <if test="tongji==2">
+        AVG(water_chy)
+      </if>
+    </if>
+    <if test="what==4">
+      <if test="tongji==0">
+        MAX(water_tmp)
+      </if>
+      <if test="tongji==1">
+        MIN(water_tmp)
+      </if>
+      <if test="tongji==2">
+        AVG(water_tmp)
+      </if>
+    </if>
+    AS y FROM water_record#{eqpId}
+    WHERE
+      UNIX_TIMESTAMP(TIME) > UNIX_TIMESTAMP(#{start,jdbcType=TIMESTAMP})
+      AND UNIX_TIMESTAMP(#{end,jdbcType=TIMESTAMP})>UNIX_TIMESTAMP(TIME)
+    GROUP BY x
+    ORDER BY x
+    ) t ORDER BY x;
+  </select>
+
+  <select id="getPieData" parameterType="map" resultMap="PieChartResultMap">
+    /*SELECT DATE_FORMAT(X,"%Y-%m-%d %H:%i:%s") AS x,Y
+    FROM(*/
+    SELECT DATE_FORMAT(TIME,
+      "%Y-%m-%d"
+    ) AS x,AVG(water_ph) as Ph,AVG(water_oxy) AS Oxy,AVG(water_heavy) as Heavy ,AVG(water_chy) AS  Chy,AVG(water_tmp) AS Tmp
+    FROM water_record#{eqpId}
+    WHERE
+    UNIX_TIMESTAMP(TIME) > UNIX_TIMESTAMP(#{start,jdbcType=TIMESTAMP})
+    AND UNIX_TIMESTAMP(#{end,jdbcType=TIMESTAMP})>UNIX_TIMESTAMP(TIME)
+    GROUP BY x
+    ORDER BY x
+   /* ) t ORDER BY x;*/
+  </select>
+
+  <select id="getDataByTime" parameterType="map" resultMap="BaseResultMap">
+  </select>
+</mapper>

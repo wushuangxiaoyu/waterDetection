@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.WaterEquipmentMapper" >
+  <resultMap id="BaseResultMap" type="entity.WaterEquipment" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="wat_id" property="watId" jdbcType="INTEGER" />
+    <result column="equipment_name" property="equipmentName" jdbcType="VARCHAR" />
+    <result column="clearNow" property="clearnow" jdbcType="INTEGER" />
+    <result column="water_condition" property="waterCondition" jdbcType="INTEGER" />
+    <result column="x_point" property="xPoint" jdbcType="DOUBLE" />
+    <result column="y_point" property="yPoint" jdbcType="DOUBLE" />
+    <result column="flag_ph" property="flagPh" jdbcType="INTEGER" />
+    <result column="flag_tmp_oxy" property="flagTmpOxy" jdbcType="INTEGER" />
+    <result column="flag_heavy" property="flagHeavy" jdbcType="INTEGER" />
+    <result column="flag_chy" property="flagChy" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="HighChartResultMap" type="entity.HighChartData">
+    <result column="time" property="x" jdbcType="DATE"/>
+    <result column="y" property="y" jdbcType="DOUBLE"/>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, wat_id, equipment_name, clearNow, water_condition, x_point, y_point, flag_ph, 
+    flag_tmp_oxy, flag_heavy, flag_chy
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="entity.WaterEquipmentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from water_equipment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from water_equipment
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from water_equipment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="entity.WaterEquipmentExample" >
+    delete from water_equipment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="entity.WaterEquipment" >
+    insert into water_equipment (id, wat_id, equipment_name, 
+      clearNow, water_condition, x_point, 
+      y_point, flag_ph, flag_tmp_oxy, 
+      flag_heavy, flag_chy)
+    values (#{id,jdbcType=INTEGER}, #{watId,jdbcType=INTEGER}, #{equipmentName,jdbcType=VARCHAR}, 
+      #{clearnow,jdbcType=INTEGER}, #{waterCondition,jdbcType=INTEGER}, #{xPoint,jdbcType=DOUBLE}, 
+      #{yPoint,jdbcType=DOUBLE}, #{flagPh,jdbcType=INTEGER}, #{flagTmpOxy,jdbcType=INTEGER}, 
+      #{flagHeavy,jdbcType=INTEGER}, #{flagChy,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="entity.WaterEquipment" >
+    insert into water_equipment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="watId != null" >
+        wat_id,
+      </if>
+      <if test="equipmentName != null" >
+        equipment_name,
+      </if>
+      <if test="clearnow != null" >
+        clearNow,
+      </if>
+      <if test="waterCondition != null" >
+        water_condition,
+      </if>
+      <if test="xPoint != null" >
+        x_point,
+      </if>
+      <if test="yPoint != null" >
+        y_point,
+      </if>
+      <if test="flagPh != null" >
+        flag_ph,
+      </if>
+      <if test="flagTmpOxy != null" >
+        flag_tmp_oxy,
+      </if>
+      <if test="flagHeavy != null" >
+        flag_heavy,
+      </if>
+      <if test="flagChy != null" >
+        flag_chy,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="watId != null" >
+        #{watId,jdbcType=INTEGER},
+      </if>
+      <if test="equipmentName != null" >
+        #{equipmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="clearnow != null" >
+        #{clearnow,jdbcType=INTEGER},
+      </if>
+      <if test="waterCondition != null" >
+        #{waterCondition,jdbcType=INTEGER},
+      </if>
+      <if test="xPoint != null" >
+        #{xPoint,jdbcType=DOUBLE},
+      </if>
+      <if test="yPoint != null" >
+        #{yPoint,jdbcType=DOUBLE},
+      </if>
+      <if test="flagPh != null" >
+        #{flagPh,jdbcType=INTEGER},
+      </if>
+      <if test="flagTmpOxy != null" >
+        #{flagTmpOxy,jdbcType=INTEGER},
+      </if>
+      <if test="flagHeavy != null" >
+        #{flagHeavy,jdbcType=INTEGER},
+      </if>
+      <if test="flagChy != null" >
+        #{flagChy,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="entity.WaterEquipmentExample" resultType="java.lang.Integer" >
+    select count(*) from water_equipment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update water_equipment
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.watId != null" >
+        wat_id = #{record.watId,jdbcType=INTEGER},
+      </if>
+      <if test="record.equipmentName != null" >
+        equipment_name = #{record.equipmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clearnow != null" >
+        clearNow = #{record.clearnow,jdbcType=INTEGER},
+      </if>
+      <if test="record.waterCondition != null" >
+        water_condition = #{record.waterCondition,jdbcType=INTEGER},
+      </if>
+      <if test="record.xPoint != null" >
+        x_point = #{record.xPoint,jdbcType=DOUBLE},
+      </if>
+      <if test="record.yPoint != null" >
+        y_point = #{record.yPoint,jdbcType=DOUBLE},
+      </if>
+      <if test="record.flagPh != null" >
+        flag_ph = #{record.flagPh,jdbcType=INTEGER},
+      </if>
+      <if test="record.flagTmpOxy != null" >
+        flag_tmp_oxy = #{record.flagTmpOxy,jdbcType=INTEGER},
+      </if>
+      <if test="record.flagHeavy != null" >
+        flag_heavy = #{record.flagHeavy,jdbcType=INTEGER},
+      </if>
+      <if test="record.flagChy != null" >
+        flag_chy = #{record.flagChy,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update water_equipment
+    set id = #{record.id,jdbcType=INTEGER},
+      wat_id = #{record.watId,jdbcType=INTEGER},
+      equipment_name = #{record.equipmentName,jdbcType=VARCHAR},
+      clearNow = #{record.clearnow,jdbcType=INTEGER},
+      water_condition = #{record.waterCondition,jdbcType=INTEGER},
+      x_point = #{record.xPoint,jdbcType=DOUBLE},
+      y_point = #{record.yPoint,jdbcType=DOUBLE},
+      flag_ph = #{record.flagPh,jdbcType=INTEGER},
+      flag_tmp_oxy = #{record.flagTmpOxy,jdbcType=INTEGER},
+      flag_heavy = #{record.flagHeavy,jdbcType=INTEGER},
+      flag_chy = #{record.flagChy,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="entity.WaterEquipment" >
+    update water_equipment
+    <set >
+      <if test="watId != null" >
+        wat_id = #{watId,jdbcType=INTEGER},
+      </if>
+      <if test="equipmentName != null" >
+        equipment_name = #{equipmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="clearnow != null" >
+        clearNow = #{clearnow,jdbcType=INTEGER},
+      </if>
+      <if test="waterCondition != null" >
+        water_condition = #{waterCondition,jdbcType=INTEGER},
+      </if>
+      <if test="xPoint != null" >
+        x_point = #{xPoint,jdbcType=DOUBLE},
+      </if>
+      <if test="yPoint != null" >
+        y_point = #{yPoint,jdbcType=DOUBLE},
+      </if>
+      <if test="flagPh != null" >
+        flag_ph = #{flagPh,jdbcType=INTEGER},
+      </if>
+      <if test="flagTmpOxy != null" >
+        flag_tmp_oxy = #{flagTmpOxy,jdbcType=INTEGER},
+      </if>
+      <if test="flagHeavy != null" >
+        flag_heavy = #{flagHeavy,jdbcType=INTEGER},
+      </if>
+      <if test="flagChy != null" >
+        flag_chy = #{flagChy,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="entity.WaterEquipment" >
+    update water_equipment
+    set wat_id = #{watId,jdbcType=INTEGER},
+      equipment_name = #{equipmentName,jdbcType=VARCHAR},
+      clearNow = #{clearnow,jdbcType=INTEGER},
+      water_condition = #{waterCondition,jdbcType=INTEGER},
+      x_point = #{xPoint,jdbcType=DOUBLE},
+      y_point = #{yPoint,jdbcType=DOUBLE},
+      flag_ph = #{flagPh,jdbcType=INTEGER},
+      flag_tmp_oxy = #{flagTmpOxy,jdbcType=INTEGER},
+      flag_heavy = #{flagHeavy,jdbcType=INTEGER},
+      flag_chy = #{flagChy,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="getRealTime" parameterType="map" resultMap="HighChartResultMap">
+    SELECT id,time,
+     <if test="what==0">
+       water_ph
+     </if>
+    <if test="what==1">
+      water_oxy
+    </if>
+    <if test="what==2">
+      water_heavy
+    </if>
+    <if test="what==3">
+      water_chy
+    </if>
+     AS y FROM (
+            SELECT * FROM water_record#{eqpId} ORDER BY id DESC LIMIT 20
+    )a ORDER BY id;
+  </select>
+</mapper>

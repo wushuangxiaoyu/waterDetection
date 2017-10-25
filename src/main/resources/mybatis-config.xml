@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+   <!-- <typeAliases>
+        <typeAlias alias="User" type="entity.User"/>
+        <typeAlias alias="Board" type="entity.Board"/>
+        <typeAlias alias="UserLoginLog" type="entity.UserLoginLog"/>
+        <typeAlias alias="Post" type="entity.Post"/>
+        <typeAlias alias="Reply" type="entity.Reply"/>
+    </typeAliases>
+    -->
+    <settings>
+        <!-- 打印查询语句 -->
+        <setting name="logImpl" value="STDOUT_LOGGING" />
+    </settings>
+    <mappers>
+        <mapper resource="entity/WaterEquipmentMapper.xml"/>
+        <mapper resource="entity/WaterRecordMapper.xml"/>
+        <mapper resource="entity/WaterUserMapper.xml"/>
+        <mapper resource="entity/ThresholdMapper.xml"/>
+    </mappers>
+</configuration>
